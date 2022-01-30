@@ -1,3 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Roboto:wght@300&display=swap');
+
 body {
 	background-color: blue;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+
+.flexContainer {
+	display: flex;
+	background-color: yellow;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+header h1, h2 {
+	text-align: center;
+	font-family: 'Nunito', sans-serif;
+}
+
+.flexContainer > div {
+	width: 75%;
+	background: greenyellow;
+}
+
+.flexContainer .game {
+	/* height: 60vh; */
+	display: flex;
+	background-color: red;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.flexContainer .gameArea {
+	height: 90%;
+	width: 100%;
+	display: flex;
+	background-color: mediumpurple;
+	justify-content: space-around;
+	align-items: center;
+	/* flex-wrap: wrap; */
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.gameArea .area:nth-child(2){
+	font-size: 1.8rem;
+}
+
+.flexContainer .area {
+	display: flex;
+	height: 90%;
+	width: auto;
+	background-color: white;
+	align-items: center;
+}
+
+.area img {
+	height: 100%;
+	width: 100%;
+}
+
+.flexContainer .commands {
+	height: 10%;
+	width: 80%;
+	display: flex;
+	background-color: greenyellow;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+@media (max-width: 992px) {
+	.flexContainer .gameArea {
+		flex-direction: column;
+	}
 }
