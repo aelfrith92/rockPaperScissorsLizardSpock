@@ -19,13 +19,29 @@
 	</header>
 	<section class="flexContainer">
 		<h2 class="score">Score: <span id="scoreCount">0</span></h2>
+		<h3 id="messageArea">Touch or click on a button to start the game</h3>
 		<div class="game">
 			<div class="commands">
-				<button class="commandButton"><img src="assets/images/Rock.svg"></button>
-				<button class="commandButton">paper</button>
-				<button class="commandButton">scissors</button>
-				<button class="commandButton">lizard</button>
-				<button class="commandButton">spock</button>
+				<button class="commandButton" id="rockButton">
+					<img src="assets/images/choices/Rock.svg" alt="Rock button">
+					<span class="label">Rock</span>
+				</button>
+				<button class="commandButton" id="paperButton">
+					<img src="assets/images/choices/Paper.svg" alt="Paper button">
+					<span class="label">Paper</span>
+				</button>
+				<button class="commandButton" id="scissorsButton">
+					<img src="assets/images/choices/Scissors.svg" alt="Scissors button">
+					<span class="label">Scissors</span>
+				</button>
+				<button class="commandButton" id="lizardButton">
+					<img src="assets/images/choices/Lizard.svg" alt="Lizard button">
+					<span class="label">Lizard</span>
+				</button>
+				<button class="commandButton" id="spockButton">
+					<img src="assets/images/choices/Spock.svg" alt="Spock button">
+					<span class="label">Spock</span>
+				</button>
 			</div>
 			<div class="gameArea">
 				<div class="area">
@@ -41,7 +57,24 @@
 	</section>
 	<section class="flexContainer">
 		<div class="instructions">
-			
+			<div>
+				<img src="assets/images/wikiRPSLS.svg">
+			</div>
+			<div>
+				<h3>Instructions</h3>
+				<ul>
+					<li>Scissors cuts Paper</li>
+					<li>Paper covers Rock</li>
+					<li>Rock crushes Lizard</li>
+					<li>Lizard poisons Spock</li>
+					<li>Spock smashes Scissors</li>
+					<li>Scissors decapitates Lizard</li>
+					<li>Lizard eats Paper</li>
+					<li>Paper disproves Spock</li>
+					<li>Spock vaporizes Rock</li>
+					<li>(and as it always has) Rock crushes Scissors</li>
+				</ul>
+			</div>
 		</div>
 		<div class="difficulty">
 			<div>
