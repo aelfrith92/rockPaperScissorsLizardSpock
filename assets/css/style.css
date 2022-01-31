@@ -21,9 +21,17 @@ header h1, h2 {
 	font-family: 'Nunito', sans-serif;
 }
 
-/* Default distance from left-right margins */
+h3, h2, h1 {
+	margin: 0;
+}
+
+ul h4 {
+	margin: 7px 10px;
+}
+
+/* Default distance from left-right margins for all main containers*/
 .flexContainer > div {
-	width: 75%;
+	width: 70%;
 }
 
 /* Showing children of the game container vertically */
@@ -118,6 +126,80 @@ header h1, h2 {
 	margin-top: 4px;
 }
 
+.flexContainer .instructions {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 1.3rem;
+	margin-top: 1.3rem;
+}
+
+.instructionsArea {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.instructionsArea img {
+	width: 80%;
+}
+
+.instructionsArea ul {
+	list-style-type:none;
+	margin: 0;
+	padding: 0;
+	font-size: 1rem;
+}
+
+/* Bullet points for the lists/instructions */
+#scissors li::before {
+	content: '';
+	width: 1rem;
+	height: 1rem;
+	display: inline-block;
+	background: url('../images/choices/Scissors.svg') no-repeat bottom center;
+	margin-bottom: -2px;
+	margin-right: 4px;
+}
+#paper li::before {
+	content: '';
+	width: 1rem;
+	height: 1rem;
+	display: inline-block;
+	background: url('../images/choices/Paper.svg') no-repeat bottom center;
+	margin-bottom: -2px;
+	margin-right: 4px;
+}
+#rock li::before {
+	content: '';
+	width: 1rem;
+	height: 1rem;
+	display: inline-block;
+	background: url('../images/choices/Rock.svg') no-repeat bottom center;
+	margin-bottom: -2px;
+	margin-right: 4px;
+}
+#spock li::before {
+	content: '';
+	width: 1rem;
+	height: 1rem;
+	display: inline-block;
+	background: url('../images/choices/Spock.svg') no-repeat bottom center;
+	margin-bottom: -2px;
+	margin-right: 4px;
+}
+#lizard li::before {
+	content: '';
+	width: 1rem;
+	height: 1rem;
+	display: inline-block;
+	background: url('../images/choices/Lizard.svg') no-repeat bottom center;
+	margin-bottom: -2px;
+	margin-right: 4px;
+}
+
 /* Breakpoints */
 @media (max-width: 992px) {
 	.flexContainer .gameArea {
@@ -143,6 +225,16 @@ header h1, h2 {
 	
 	.commandButton {
 		font-size: 0.6rem;
+	}
+
+	.flexContainer .instructions {
+		display: flex;
+		flex-direction: column;
+		padding-bottom: 1.3rem;
+	}
+
+	.instructionsArea {
+		width: 50%;
 	}
 }
 
