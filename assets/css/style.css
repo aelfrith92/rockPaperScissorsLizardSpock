@@ -82,8 +82,8 @@ header h1, h2 {
 /* Default style of game buttons */
 .commandButton {
 	width: 12%;
-  background: #FF4742;
-  border: 1px solid #FF4742;
+  background: #AD0600;
+  border: 1px solid #AD0600;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
@@ -101,7 +101,7 @@ header h1, h2 {
 .commandButton:active {
   background-color: initial;
   background-position: 0 0;
-  color: #FF4742;
+  color: #AD0600;
 }
 
 /* lvha effects on buttons */
@@ -111,6 +111,10 @@ header h1, h2 {
 
 /* Applying default style to imgs inside game buttons */
 .commands img {
+	margin-top: 4px;
+}
+
+.commands svg {
 	margin-top: 4px;
 }
 
