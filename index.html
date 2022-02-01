@@ -18,7 +18,6 @@
 		</div>
 	</header>
 	<section class="flexContainer">
-		<h2 class="score">Score: <span id="scoreCount">0</span></h2>
 		<h3 id="messageArea">Touch or click on a button to start the game</h3>
 		<div class="game">
 			<div class="commands">
@@ -55,22 +54,25 @@
 					<span class="label">Spock</span>
 				</button>
 			</div>
+			<div class="scoreArea">
+				<h2>Your Score: <span id="yourCount">0</span></h2>
+				<h2>Computer Score: <span id="computerCount">0</span></h2>
+			</div>
 			<div class="gameArea">
 				<div class="area">
-					<img src="assets/images/wikiRPSLS.svg">
+					<img id="userChoice" src="assets/images/wikiRPSLS.svg" alt="Placeholder Image for the user area">
 				</div>
 				<div class="area">VS</div>
 				<div class="area">
-					<img src="assets/images/wikiRPSLS.svg">
+					<img id="computerChoice" src="assets/images/wikiRPSLS.svg" alt="Placeholder Image for the computer area">
 				</div>
 			</div>
-			
 		</div>
 	</section>
 	<section class="flexContainer">
 		<div class="instructions">
 			<div class="instructionsArea">
-				<img src="assets/images/wikiRPSLS.svg">
+				<img src="assets/images/wikiRPSLS.svg" alt="Instructions">
 			</div>
 			<div class="instructionsArea">
 				<ul>
