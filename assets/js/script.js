@@ -167,10 +167,22 @@ function whoWins(user, computer){
 			alert(`Unknown choice: ${choice}`);
       throw `Unknown choice triggered: ${choice}. Aborting!`;
 	}
-	score(message);
+	
+	if(score(message) === 3){
+		// La seguente funzione determina le sorti del gioco
+		alert('game ends here');
+		document.getElementById('yourCount').textContent = '0';
+		document.getElementById('computerCount').textContent = '0';
+	}
 }
 
 function score(result){
-	let scoreSoFar = document.getElementById('scoreCount').textContent;
-	// if (scoreSoFar )
+	let userScoreSoFar = parseInt(document.getElementById('yourCount').textContent);
+	let computerScoreSoFar = parseInt(document.getElementById('computerCount').textContent);
+	if (result === 'You win!'){
+		document.getElementById('yourCount').textContent = ++userScoreSoFar;
+	} else if (result === 'Computer wins!' || result !== 'Tie!'){
+		document.getElementById('computerCount').textContent = ++computerScoreSoFar;
+	}
+	return userScoreSoFar + computerScoreSoFar;
 }
