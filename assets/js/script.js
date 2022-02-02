@@ -97,85 +97,104 @@ function runGame(choice, buttons){
 			alert(`Unknown choice: ${choice}`);
       throw `Unknown choice triggered: ${choice}. Aborting!`;
 	}
-	whoWins(choice, randomChoice);
+
+	let endOfGame = whoWins(choice, randomChoice);
+	if(endOfGame[0] === 2){
+		console.log('You Win');
+		setTimeout(alert('You Win'), 2000);
+		resetGame();
+	} else if (endOfGame[1] === 2){
+		console.log('Computer wins');
+		setTimeout(alert('Computer wins'), 2000);
+		resetGame();
+	}
 };
 
+/**
+* The following function determines who wins the single match
+* and returns an array of the scores user vs computer. End of game
+* is determined by controlling them.
+*/
 function whoWins(user, computer){
 	let message;
+	let messageDOM = document.getElementById('messageArea');
+	// returns the message depending on the choices
+	// the variable message is then passed into the score function
+	// to update the scores in the DOM and to retrieve them
+	// each time, to decide whether to trigger the end of the game or not.
 	switch(user){
 		case 'rockButton':
 			if (user === computer){
 				message = 'Tie!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else if (computer === 'lizardButton' || computer === 'scissorsButton'){
 				message = 'You win!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else {
 				message = 'Computer wins!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			}
 			break;
 		case 'paperButton':
 			if (user === computer){
 				message = 'Tie!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else if (computer === 'rockButton' || computer === 'spockButton'){
 				message = 'You win!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else {
 				message = 'Computer wins!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			}
 			break;
 		case 'scissorsButton':
 			if (user === computer){
 				message = 'Tie!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else if (computer === 'paperButton' || computer === 'lizardButton'){
 				message = 'You win!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else {
 				message = 'Computer wins!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			}
 			break;
 		case 'lizardButton':
 			if (user === computer){
 				message = 'Tie!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else if (computer === 'spockButton' || computer === 'paperButton'){
 				message = 'You win!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else {
 				message = 'Computer wins!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			}
 			break;
 		case 'spockButton':
 			if (user === computer){
 				message = 'Tie!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else if (computer === 'rockButton' || computer === 'scissorsButton'){
 				message = 'You win!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			} else {
 				message = 'Computer wins!';
-				document.getElementById('messageArea').textContent = message;
+				messageDOM.textContent = message;
 			}
 			break;
 		default:
 			alert(`Unknown choice: ${choice}`);
       throw `Unknown choice triggered: ${choice}. Aborting!`;
 	}
-	
-	if(score(message) === 3){
-		// La seguente funzione determina le sorti del gioco
-		alert('game ends here');
-		document.getElementById('yourCount').textContent = '0';
-		document.getElementById('computerCount').textContent = '0';
-	}
+	//The array of scores is the returned in the runGame above
+	return score(message);
 }
 
+/**
+* This function retrieves the scores, updates them and passes 
+* them as an array to the calling function above
+*/
 function score(result){
 	let userScoreSoFar = parseInt(document.getElementById('yourCount').textContent);
 	let computerScoreSoFar = parseInt(document.getElementById('computerCount').textContent);
@@ -184,5 +203,14 @@ function score(result){
 	} else if (result === 'Computer wins!' || result !== 'Tie!'){
 		document.getElementById('computerCount').textContent = ++computerScoreSoFar;
 	}
-	return userScoreSoFar + computerScoreSoFar;
+
+	return [userScoreSoFar, computerScoreSoFar];
+}
+
+/**
+* This function is supposed to reset the game
+*/
+function resetGame(){
+	document.getElementById('yourCount').textContent = '0';
+	document.getElementById('computerCount').textContent = '0';
 }
