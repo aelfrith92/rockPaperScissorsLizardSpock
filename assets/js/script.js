@@ -38,77 +38,57 @@ document.addEventListener('DOMContentLoaded', function() {
 	for (let button of buttons) {
 		button.addEventListener('click', function(){
 			userTriggeredChoice = this.id;
-			runGame(userTriggeredChoice, buttons);	
+			runGame(userTriggeredChoice);	
 		});
 	}
 });
 
 /**
-* This function actually starts the game. It
-* - updates the pictures inside the game areas, showing users' choices
-* - updates the Score
-* - updates the message area
+* The following function updates the images inside the DOM, according to user's choice, as well as computer random pick
+* Compared to the previous version, it spares some lines of code, repeated in the calling function for both the user and the computer
 */
-function runGame(choice, buttons){
-	switch(choice){
+function updateSVG (update, who){
+	switch(update){
 		case 'rockButton':
-			document.getElementById('userChoice').setAttribute('src', 'assets/images/choices/Rock.svg');
+		case 0:
+			document.getElementById(who).setAttribute('src', 'assets/images/choices/Rock.svg');
+			if (who === 'computerChoice'){
+				return document.getElementById('rockButton').id;
+			}
 			break;
 		case 'paperButton':
-			document.getElementById('userChoice').setAttribute('src', 'assets/images/choices/Paper.svg');
+		case 1:
+			document.getElementById(who).setAttribute('src', 'assets/images/choices/Paper.svg');
+			if (who === 'computerChoice'){
+				return document.getElementById('paperButton').id;
+			}
 			break;
 		case 'scissorsButton':
-			document.getElementById('userChoice').setAttribute('src', 'assets/images/choices/Scissors.svg');
+		case 2:
+			document.getElementById(who).setAttribute('src', 'assets/images/choices/Scissors.svg');
+			if (who === 'computerChoice'){
+				return document.getElementById('scissorsButton').id;
+			}
 			break;
 		case 'lizardButton':
-			document.getElementById('userChoice').setAttribute('src', 'assets/images/choices/Lizard.svg');
+		case 3:
+			document.getElementById(who).setAttribute('src', 'assets/images/choices/Lizard.svg');
+			if (who === 'computerChoice'){
+				return document.getElementById('lizardButton').id;
+			}
 			break;
 		case 'spockButton':
-			document.getElementById('userChoice').setAttribute('src', 'assets/images/choices/Spock.svg');
-			break;
-		default:
-			alert(`Unknown choice: ${choice}`);
-      throw `Unknown choice triggered: ${choice}. Aborting!`;
-	}
-	
-	let randomChoice = Math.floor(Math.random() * 5);
-	switch(randomChoice){
-		case 0:
-			document.getElementById('computerChoice').setAttribute('src', 'assets/images/choices/Rock.svg');
-			randomChoice = document.getElementById('rockButton').id;
-			break;
-		case 1:
-			document.getElementById('computerChoice').setAttribute('src', 'assets/images/choices/Paper.svg');
-			randomChoice = document.getElementById('paperButton').id;
-			break;
-		case 2:
-			document.getElementById('computerChoice').setAttribute('src', 'assets/images/choices/Scissors.svg');
-			randomChoice = document.getElementById('scissorsButton').id;
-			break;
-		case 3:
-			document.getElementById('computerChoice').setAttribute('src', 'assets/images/choices/Lizard.svg');
-			randomChoice = document.getElementById('lizardButton').id;
-			break;
 		case 4:
-			document.getElementById('computerChoice').setAttribute('src', 'assets/images/choices/Spock.svg');
-			randomChoice = document.getElementById('spockButton').id;
+			document.getElementById(who).setAttribute('src', 'assets/images/choices/Spock.svg');
+			if (who === 'computerChoice'){
+				return document.getElementById('spockButton').id;
+			}
 			break;
 		default:
-			alert(`Unknown choice: ${choice}`);
-      throw `Unknown choice triggered: ${choice}. Aborting!`;
+			alert(`Unknown choice: ${update}`);
+      throw `Unknown choice triggered: ${update}. Aborting!`;
 	}
-
-	let endOfGame = whoWins(choice, randomChoice);
-	if(endOfGame[0] === 2){
-		console.log('You Win');
-		setTimeout(alert('You Win'), 2000);
-		resetGame();
-	} else if (endOfGame[1] === 2){
-		console.log('Computer wins');
-		setTimeout(alert('Computer wins'), 2000);
-		resetGame();
-	}
-};
+}
 
 /**
 * The following function determines who wins the single match
@@ -116,71 +96,70 @@ function runGame(choice, buttons){
 * is determined by controlling them.
 */
 function whoWins(user, computer){
-	let message;
 	let messageDOM = document.getElementById('messageArea');
+	console.log('Hai scelto ' + user + ', mentre il computer ha scelto ' + computer);
 	// returns the message depending on the choices
 	// the variable message is then passed into the score function
 	// to update the scores in the DOM and to retrieve them
-	// each time, to decide whether to trigger the end of the game or not.
 	switch(user){
 		case 'rockButton':
 			if (user === computer){
-				message = 'Tie!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Tie!';
+				
 			} else if (computer === 'lizardButton' || computer === 'scissorsButton'){
-				message = 'You win!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'You win!';
+				
 			} else {
-				message = 'Computer wins!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Computer wins!';
+				
 			}
 			break;
 		case 'paperButton':
 			if (user === computer){
-				message = 'Tie!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Tie!';
+				
 			} else if (computer === 'rockButton' || computer === 'spockButton'){
-				message = 'You win!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'You win!';
+				
 			} else {
-				message = 'Computer wins!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Computer wins!';
+				
 			}
 			break;
 		case 'scissorsButton':
 			if (user === computer){
-				message = 'Tie!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Tie!';
+				
 			} else if (computer === 'paperButton' || computer === 'lizardButton'){
-				message = 'You win!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'You win!';
+				
 			} else {
-				message = 'Computer wins!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Computer wins!';
+				
 			}
 			break;
 		case 'lizardButton':
 			if (user === computer){
-				message = 'Tie!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Tie!';
+				
 			} else if (computer === 'spockButton' || computer === 'paperButton'){
-				message = 'You win!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'You win!';
+				
 			} else {
-				message = 'Computer wins!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Computer wins!';
+				
 			}
 			break;
 		case 'spockButton':
 			if (user === computer){
-				message = 'Tie!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Tie!';
+				
 			} else if (computer === 'rockButton' || computer === 'scissorsButton'){
-				message = 'You win!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'You win!';
+				
 			} else {
-				message = 'Computer wins!';
-				messageDOM.textContent = message;
+				messageDOM.textContent = 'Computer wins!';
+				
 			}
 			break;
 		default:
@@ -188,7 +167,7 @@ function whoWins(user, computer){
       throw `Unknown choice triggered: ${choice}. Aborting!`;
 	}
 	//The array of scores is the returned in the runGame above
-	return score(message);
+	return score(messageDOM.textContent);
 }
 
 /**
@@ -206,6 +185,23 @@ function score(result){
 
 	return [userScoreSoFar, computerScoreSoFar];
 }
+
+/**
+* This function actually starts the game. It
+* - updates the pictures inside the game areas, showing users' choices
+* - updates the Score
+* - updates the message area
+*/
+function runGame(choice){
+	updateSVG(choice, 'userChoice');
+	
+	let randomChoice = Math.floor(Math.random() * 5);
+	let computerChoice = updateSVG(randomChoice, 'computerChoice');
+	// The following variable is an array that contains the scores.
+	// It determines the end of the game.
+	let endOfGame = whoWins(choice, computerChoice);
+	console.log('Il punteggio attuale è: Io ' + endOfGame[0] + ' Computer ' + endOfGame[1]);
+};
 
 /**
 * This function is supposed to reset the game
