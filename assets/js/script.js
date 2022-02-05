@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		rounds: 3
 	}
 
+	let allButtons = document.getElementsByTagName('button');
+	for (let button of allButtons) {
+		button.addEventListener('click', function(){
+			document.getElementsByTagName('h2')[0].classList.add('removed');
+		});
+	}
+	
 	let difficultyButtons = document.getElementsByClassName('difficultyButtons');
 	for (let button of difficultyButtons) {
 		button.addEventListener('click', function(){

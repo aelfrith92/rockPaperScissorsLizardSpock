@@ -26,13 +26,29 @@ h3 {
 	margin: 0.3rem auto;
 }
 
+.removed {
+	display: none;
+}
+
+.not-visible {
+	visibility: hidden;
+}
+
+.visible {
+	visibility: visible;
+}
+
+#messageArea {
+	width: 100%;
+}
+
 .game .scoreArea {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	margin-top: 1.3rem;
-	width: 80%;
+	margin-top: 1.0rem;
+	width: 100%;
 }
 #yourCount {
 	color: green;
@@ -64,7 +80,7 @@ ul h4 {
 /* Setting equal speace between children of the gameArea container */
 .flexContainer .gameArea {
 	height: 90%;
-	width: 80%;
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -95,7 +111,7 @@ ul h4 {
 /* Distancing them equally */
 .flexContainer .commands {
 	height: 10%;
-	width: 80%;
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -135,10 +151,6 @@ ul h4 {
 }
 
 /* Applying default style to imgs inside game buttons */
-.commands img {
-	margin-top: 4px;
-}
-
 .commands svg {
 	margin-top: 4px;
 }
@@ -149,7 +161,7 @@ ul h4 {
 	justify-content: center;
 	align-items: center;
 	padding-bottom: 1.3rem;
-	margin-top: 1.3rem;
+	margin-top: 1.1rem;
 }
 
 .instructionsArea {
@@ -176,18 +188,19 @@ ul h4 {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
-	width: 80%;
+	width: 85%;
 }
 
 .difficultyArea {
 	display: flex;
-	width: 50%;
+	width: 40%;
 	align-items: center;
 	justify-content: space-around;
 }
 
 .difficulty .difficultyArea:nth-child(2) {
 	flex-direction: column;
+	
 }
 
 .difficultyArea #notes {
@@ -208,12 +221,12 @@ ul h4 {
 }
 
 .difficultyButtons {
-	background: #072227;
-  border: 1px solid #072227;
+	background: #FAEEE7;
+  border: 1px solid #FAEEE7;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
-  color: #AEFEFF;
+  color: #325288;
   cursor: pointer;
   font-family: nunito,roboto,sans-serif;
   text-align: center;
@@ -224,9 +237,9 @@ ul h4 {
 /* lvha effects on buttons */
 .difficultyButtons:hover,
 .difficultyButtons:active {
-  background-color: initial;
+  background-color: #fff;
   background-position: 0 0;
-  color: #072227;
+  color: #325288;
 }
 
 .bestOfButtons {
@@ -251,16 +264,15 @@ ul h4 {
   color: #325288;
 }
 
-#notes span{
+#notes span {
 	font-weight: bold;
 }
 
-#selectedDifficulty{
+#selectedDifficulty {
 	text-transform: capitalize;
-	color: #072227;
 }
 
-#selectedBestOf{
+#selectedBestOf, #selectedDifficulty {
 	color: #325288;
 }
 
@@ -316,21 +328,34 @@ ul h4 {
 	.commandButton {
 		font-size: 0.8rem;
 	}
+
+	.label {
+		display: none; 
+	}
 }
 
 @media (max-width: 768px) {
 
-	.flexContainer > div {
+	.flexContainer > div, .instructionsArea, .difficultyArea, .instructionsArea > ul {
 		width: 100%;
+	}
+	
+	.instructionsArea > ul{
+		text-align: center;
 	}
 	
 	.commandButton {
 		font-size: 0.6rem;
 	}
 
-	.difficulty {
+	.game .scoreArea {
 		flex-direction: column;
 		width: 100%;
+	}
+
+	.difficulty {
+		flex-direction: column;
+		width: 50%;
 	}
 
 	.area img {
@@ -339,24 +364,15 @@ ul h4 {
 		padding-top: 0.3rem;
 		padding-bottom: 0.3rem;
 	}
+
+	.scoreArea h2{
+		width: 100%
+	}
 	
 	.flexContainer .instructions {
 		display: flex;
 		flex-direction: column;
 		padding-bottom: 1.3rem;
-		width: 100%;
-	}
-
-	.instructionsArea {
-		width: 50%;
-	}
-
-	.label {
-		display: none; 
-	}
-
-	.game .scoreArea {
-		flex-direction: column;
 		width: 100%;
 	}
 }
@@ -366,5 +382,8 @@ ul h4 {
 	.commandButton {
 		min-width: 2.0rem;
 	}
-	
+
+	.difficulty {
+		width: 70%;
+	}
 }
