@@ -170,6 +170,100 @@ ul h4 {
 	font-size: 1rem;
 }
 
+/*User-friendly area containing all interactions*/
+.difficulty {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	width: 80%;
+}
+
+.difficultyArea {
+	display: flex;
+	width: 50%;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.difficulty .difficultyArea:nth-child(2) {
+	flex-direction: column;
+}
+
+.difficultyArea #notes {
+	text-align: center;
+	font-size: 0.8rem;
+}
+
+.difficultyArea > div {
+	width: 95%;
+}
+
+.easyMediumHard, .bestOf {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	margin: 4px auto;
+}
+
+.difficultyButtons {
+	background: #072227;
+  border: 1px solid #072227;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #AEFEFF;
+  cursor: pointer;
+  font-family: nunito,roboto,sans-serif;
+  text-align: center;
+  text-rendering: geometricprecision;
+  touch-action: manipulation;
+}
+
+/* lvha effects on buttons */
+.difficultyButtons:hover,
+.difficultyButtons:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #072227;
+}
+
+.bestOfButtons {
+	background: #325288;
+  border: 1px solid #325288;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FAEEE7;
+  cursor: pointer;
+  font-family: nunito,roboto,sans-serif;
+  text-align: center;
+  text-rendering: geometricprecision;
+  touch-action: manipulation;
+}
+
+/* lvha effects on buttons */
+.bestOfButtons:hover,
+.bestOfButtons:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #325288;
+}
+
+#notes span{
+	font-weight: bold;
+}
+
+#selectedDifficulty{
+	text-transform: capitalize;
+	color: #072227;
+}
+
+#selectedBestOf{
+	color: #325288;
+}
+
 /* Bullet points for the lists/instructions */
 #scissors li::before {
 	content: '';
@@ -234,7 +328,7 @@ ul h4 {
 		font-size: 0.6rem;
 	}
 
-	.flexContainer .gameArea {
+	.difficulty {
 		flex-direction: column;
 		width: 100%;
 	}

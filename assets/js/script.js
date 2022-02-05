@@ -2,7 +2,7 @@
 * It adds the hovering effect to the svg file, which cannot be styled via CSS
 */
 function hoverButtons (){
-	let buttons = document.getElementsByTagName('button');
+	let buttons = document.getElementsByClassName('commandButton');
 	for(let button of buttons){
 		// Select the path tag inside the svg tag to modify its attribute 'stroke'
 		button.addEventListener('mouseover', function(){
@@ -33,6 +33,28 @@ hoverButtons();
 
 /*The following Event Listener contains an anonymous function which executes when the event occurs*/
 document.addEventListener('DOMContentLoaded', function() {
+	/* User preferences */
+	let game = {
+		difficulty: 'easy',
+		rounds: 3
+	}
+
+	let difficultyButtons = document.getElementsByClassName('difficultyButtons');
+	for (let button of difficultyButtons) {
+		button.addEventListener('click', function(){
+			game.difficulty = this.id;
+			document.getElementById('selectedDifficulty').textContent = this.id;
+		});
+	}
+
+	let bestOfButtons = document.getElementsByClassName('bestOfButtons');
+	for (let button of bestOfButtons) {
+		button.addEventListener('click', function(){
+			game.rounds = this.id;
+			document.getElementById('selectedBestOf').textContent = this.id;
+		});
+	}
+	
 	let buttons = document.getElementsByClassName('commandButton');
 	let userTriggeredChoice;
 	for (let button of buttons) {
@@ -205,6 +227,7 @@ function runGame(choice){
 
 /**
 * This function is supposed to reset the game
+* when specific buttons are being hit
 */
 function resetGame(){
 	document.getElementById('yourCount').textContent = '0';
