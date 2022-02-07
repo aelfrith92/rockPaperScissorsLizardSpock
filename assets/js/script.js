@@ -15,62 +15,57 @@ function hoverButtons (){
 }
 hoverButtons();
 // The Game algorythm starts here
-/*
-	The game starts when the user clicks or touches one of the buttons
-	For the time being, the game mode is set to 'best of 3'. Below are the steps
-	- The game starts together with an empty user's array of win VS lose OR a simple sum of WINs
-	- The buttons all have event listeners which trigger the game and the consequent:
-		- random function for the computer choice
-		- update the choices in the DOM
-		- push of lose/win or count of WINs
-		- check on the number of rounds played (best of 3)
-		- Score update and message update by updating the DOM
-		- user array reset to start over again
+
+/**
+* This function sets buttons at the bottom of the page to a disabled status
+* To let the game start with certain parameters
 */
-
-//Waiting for the DOM to finish loading before running the game
-//Get the button elements and add event listeners to them
-
-/*The following Event Listener contains an anonymous function which executes when the event occurs*/
-document.addEventListener('DOMContentLoaded', function() {
-	/* User preferences */
-	let game = {
-		difficulty: 'easy',
-		rounds: 3
-	}
-
-	let allButtons = document.getElementsByTagName('button');
-	for (let button of allButtons) {
-		button.addEventListener('click', function(){
-			document.getElementsByTagName('h2')[0].classList.add('removed');
-		});
-	}
+function disableButtons(){
 	
-	let difficultyButtons = document.getElementsByClassName('difficultyButtons');
-	for (let button of difficultyButtons) {
-		button.addEventListener('click', function(){
-			game.difficulty = this.id;
-			document.getElementById('selectedDifficulty').textContent = this.id;
-		});
+	let allDifficultyButtons = document.querySelectorAll('.difficulty button');
+	
+	for(let button of allDifficultyButtons){
+		button.disabled = true;
+		if(button.className === 'difficultyButtons'){
+			button.classList.toggle('difficultyButtons');
+		} else {
+			button.classList.toggle('bestOfButtons');
+		}
+	}
+}
+
+/**
+* This function ends the game and re-enable buttons for user preferences
+* It also shows the final score announcing the winnner
+*/
+function preReset (user, computer){
+	let allDifficultyButtons = document.querySelectorAll('.difficulty button');
+
+	for(let button of allDifficultyButtons){
+		button.disabled = false;
+		if(button.id === 'easy' || button.id === 'medium' || button.id === 'hard'){
+			button.classList.add('difficultyButtons');
+		} else {
+			button.classList.add('bestOfButtons');
+		}
 	}
 
-	let bestOfButtons = document.getElementsByClassName('bestOfButtons');
-	for (let button of bestOfButtons) {
-		button.addEventListener('click', function(){
-			game.rounds = this.id;
-			document.getElementById('selectedBestOf').textContent = this.id;
-		});
+	if(user > computer){
+		document.getElementById('messageArea').textContent = `You have won`;
+	} else{
+		document.getElementById('messageArea').textContent = 'The computer has won';
 	}
-	
-	let buttons = document.getElementsByClassName('commandButton');
-	let userTriggeredChoice;
-	for (let button of buttons) {
-		button.addEventListener('click', function(){
-			userTriggeredChoice = this.id;
-			runGame(userTriggeredChoice);	
-		});
-	}
-});
+
+	document.getElementsByTagName('h2')[0].classList.remove('not-visible');
+}
+
+/**
+* This function is supposed to reset the game
+*/
+function resetGame(){
+	document.getElementById('yourCount').textContent = '0';
+	document.getElementById('computerCount').textContent = '0';
+}
 
 /**
 * The following function updates the images inside the DOM, according to user's choice, as well as computer random pick
@@ -126,7 +121,6 @@ function updateSVG (update, who){
 */
 function whoWins(user, computer){
 	let messageDOM = document.getElementById('messageArea');
-	console.log('Hai scelto ' + user + ', mentre il computer ha scelto ' + computer);
 	// returns the message depending on the choices
 	// the variable message is then passed into the score function
 	// to update the scores in the DOM and to retrieve them
@@ -195,7 +189,7 @@ function whoWins(user, computer){
 			alert(`Unknown choice: ${choice}`);
       throw `Unknown choice triggered: ${choice}. Aborting!`;
 	}
-	//The array of scores is the returned in the runGame above
+	//The array of scores is then returned in the runGame function
 	return score(messageDOM.textContent);
 }
 
@@ -221,7 +215,7 @@ function score(result){
 * - updates the Score
 * - updates the message area
 */
-function runGame(choice){
+function runGame(choice, difficulty, nRounds){
 	updateSVG(choice, 'userChoice');
 	
 	let randomChoice = Math.floor(Math.random() * 5);
@@ -229,14 +223,93 @@ function runGame(choice){
 	// The following variable is an array that contains the scores.
 	// It determines the end of the game.
 	let endOfGame = whoWins(choice, computerChoice);
-	console.log('Il punteggio attuale è: Io ' + endOfGame[0] + ' Computer ' + endOfGame[1]);
-};
-
-/**
-* This function is supposed to reset the game
-* when specific buttons are being hit
-*/
-function resetGame(){
-	document.getElementById('yourCount').textContent = '0';
-	document.getElementById('computerCount').textContent = '0';
+	// Checking number of rounds played and ending the game if necessary. Disabling buttons at the bottom while the game is ongoing.
+	if (nRounds === 3){
+		if(endOfGame[0] !== nRounds - 1 && endOfGame[1] !== nRounds - 1){
+			if(document.getElementById('easy').disabled === false){
+				disableButtons();
+			}
+		}
+		if (endOfGame[0] === nRounds - 1 || endOfGame[1] === nRounds - 1){
+			preReset(endOfGame[0], endOfGame[1]);
+		}
+	} else {
+		if(endOfGame[0] !== nRounds - 2 && endOfGame[1] !== nRounds - 2){
+			if(document.getElementById('easy').disabled === false){
+				disableButtons();
+			}
+		}
+		if (endOfGame[0] === nRounds - 2 || endOfGame[1] === nRounds - 2){
+			preReset(endOfGame[0], endOfGame[1]);
+		}
+	}
 }
+
+/*
+	The game starts when the user clicks or touches one of the buttons
+	For the time being, the game mode is set to 'best of 3'. Below are the steps
+	- The game starts together with an empty user's array of win VS lose OR a simple sum of WINs
+	- The buttons all have event listeners which trigger the game and the consequent:
+		- random function for the computer choice
+		- update the choices in the DOM
+		- push of lose/win or count of WINs
+		- check on the number of rounds played (best of 3)
+		- Score update and message update by updating the DOM
+		- user array reset to start over again
+*/
+
+//Waiting for the DOM to finish loading before running the game
+//Get the button elements and add event listeners to them
+
+/*The following Event Listener contains an anonymous function which executes when the event occurs*/
+document.addEventListener('DOMContentLoaded', function() {
+
+	/* User preferences */
+	let game = {
+		difficulty: 'easy',
+		rounds: 3
+	}
+
+	// Questa idea non funziona: implementare il bottone di 'Nuova Partita'
+	let hasStartedAlready = document.getElementById('messageArea');
+	console.log(hasStartedAlready.textContent);
+	if(hasStartedAlready.textContent === 'You have won' || hasStartedAlready.textContent === 'The computer has won'){
+		resetGame();
+		game.difficulty = document.getElementById('selectedDifficulty').textContent;
+		game.difficulty.style.textTransform = 'lowercase';
+		game.rounds = parseInt(document.getElementById('selectedBestOf').textContent);
+	}
+
+	let allButtons = document.getElementsByTagName('button');
+	for (let button of allButtons) {
+		button.addEventListener('click', function(){
+			document.getElementsByTagName('h2')[0].classList.add('not-visible');
+		});
+	}
+	
+	let difficultyButtons = document.getElementsByClassName('difficultyButtons');
+	for (let button of difficultyButtons) {
+		button.addEventListener('click', function(){
+			game.difficulty = this.id;
+			document.getElementById('selectedDifficulty').textContent = this.id;
+		});
+	}
+
+	let bestOfButtons = document.getElementsByClassName('bestOfButtons');
+	for (let button of bestOfButtons) {
+		button.addEventListener('click', function(){
+			game.rounds = this.id;
+			document.getElementById('selectedBestOf').textContent = this.id;
+		});
+	}
+	
+	let buttons = document.getElementsByClassName('commandButton');
+	let userTriggeredChoice;
+	for (let button of buttons) {
+		button.addEventListener('click', function(){
+			userTriggeredChoice = this.id;
+			//runGame should keep note of both difficulty and number of rounds
+			runGame(userTriggeredChoice, game.difficulty, game.rounds);	
+		});
+	}
+});
