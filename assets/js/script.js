@@ -223,6 +223,25 @@ function runGame(choice, difficulty, nRounds){
 	// The following variable is an array that contains the scores.
 	// It determines the end of the game.
 	let endOfGame = whoWins(choice, computerChoice);
+
+	// The following check determines how many chances the user is given, according to the level of difficulty selected
+	// For example, Easy = if the computer wins, the random pick hits again (50% more of chances to win); Medium = equal chances both for the user 
+	// and the computer; Hard = if the user wins, the random pick hits again (50% less of chances to lose).
+	// 
+	let tempOutcome = document.getElementById('messageArea').textContent;
+	console.log(difficulty + ' ' + tempOutcome);
+	if (difficulty === 'easy' && tempOutcome === 'Computer wins!'){
+		document.getElementById('computerCount').textContent = --endOfGame[1];
+		randomChoice = Math.floor(Math.random() * 5);
+		computerChoice = updateSVG(randomChoice, 'computerChoice');
+		endOfGame = whoWins(choice, computerChoice);
+	} else if (difficulty === 'hard' && tempOutcome === 'You win!'){
+		document.getElementById('yourCount').textContent = --endOfGame[0];
+		randomChoice = Math.floor(Math.random() * 5);
+		computerChoice = updateSVG(randomChoice, 'computerChoice');
+		endOfGame = whoWins(choice, computerChoice);
+	}
+	
 	// Checking number of rounds played and ending the game if necessary. Disabling buttons at the bottom while the game is ongoing.
 	if (nRounds === 3){
 		if(endOfGame[0] !== nRounds - 1 && endOfGame[1] !== nRounds - 1){
@@ -270,16 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		rounds: 3
 	}
 
-	// Questa idea non funziona: implementare il bottone di 'Nuova Partita'
-	let hasStartedAlready = document.getElementById('messageArea');
-	console.log(hasStartedAlready.textContent);
-	if(hasStartedAlready.textContent === 'You have won' || hasStartedAlready.textContent === 'The computer has won'){
-		resetGame();
-		game.difficulty = document.getElementById('selectedDifficulty').textContent;
-		game.difficulty.style.textTransform = 'lowercase';
-		game.rounds = parseInt(document.getElementById('selectedBestOf').textContent);
-	}
-
 	let allButtons = document.getElementsByTagName('button');
 	for (let button of allButtons) {
 		button.addEventListener('click', function(){
@@ -307,6 +316,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	let userTriggeredChoice;
 	for (let button of buttons) {
 		button.addEventListener('click', function(){
+			let hasStartedAlready = document.getElementById('messageArea');
+			if(hasStartedAlready.textContent === 'You have won' || hasStartedAlready.textContent === 'The computer has won'){
+				resetGame();
+				let diff = document.getElementById('selectedDifficulty');
+				diff.style.textTransform = 'lowercase';
+				game.difficulty = diff.textContent;
+				game.rounds = parseInt(document.getElementById('selectedBestOf').textContent);
+			}
 			userTriggeredChoice = this.id;
 			//runGame should keep note of both difficulty and number of rounds
 			runGame(userTriggeredChoice, game.difficulty, game.rounds);	
