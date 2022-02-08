@@ -72,7 +72,6 @@ function preReset (user, computer){
 	if(newGameButton.classList[0] === 'not-visible'){
 		newGameButton.classList.remove('not-visible');
 	}
-	console.log(newGameButton.classList);
 	if(newGameButton.classList[0] !== 'newGameButton' && newGameButton.classList[1] !== 'newGameButton'){
 		newGameButton.classList.add('newGameButton');
 	}
@@ -100,46 +99,70 @@ function resetGame(){
 	}
 }
 
+function updatePicks(what, who){
+	who = who.split('C');
+	what = what.split('B');
+	
+	who = document.getElementById(`${who[0]}Pick`);
+	if(who.id === 'userPick'){
+		who.textContent = what[0];
+	} else {
+		who.textContent = what[0];
+	}
+	who.style.textTransform = "capitalize";
+}
+
 /**
 * The following function updates the images inside the DOM, according to user's choice, as well as computer random pick
-* Compared to the previous version, it spares some lines of code, repeated in the calling function for both the user and the computer
+* Compared to a previous version, it spares some lines of code, repeated in the calling function for both the user and the computer
 */
 function updateSVG (update, who){
+	
 	switch(update){
 		case 'rockButton':
 		case 0:
 			document.getElementById(who).setAttribute('src', 'assets/images/choices/Rock.svg');
 			if (who === 'computerChoice'){
+				updatePicks(document.getElementById('rockButton').id, who);
 				return document.getElementById('rockButton').id;
 			}
+			updatePicks(update, who);
 			break;
 		case 'paperButton':
 		case 1:
 			document.getElementById(who).setAttribute('src', 'assets/images/choices/Paper.svg');
 			if (who === 'computerChoice'){
+				updatePicks(document.getElementById('paperButton').id, who);
 				return document.getElementById('paperButton').id;
 			}
+			updatePicks(update, who);
 			break;
 		case 'scissorsButton':
 		case 2:
 			document.getElementById(who).setAttribute('src', 'assets/images/choices/Scissors.svg');
 			if (who === 'computerChoice'){
+				updatePicks(document.getElementById('scissorsButton').id, who);
 				return document.getElementById('scissorsButton').id;
 			}
+			updatePicks(update, who);
 			break;
 		case 'lizardButton':
 		case 3:
 			document.getElementById(who).setAttribute('src', 'assets/images/choices/Lizard.svg');
 			if (who === 'computerChoice'){
+				updatePicks(document.getElementById('lizardButton').id, who);
 				return document.getElementById('lizardButton').id;
 			}
+			updatePicks(update, who);
 			break;
 		case 'spockButton':
 		case 4:
 			document.getElementById(who).setAttribute('src', 'assets/images/choices/Spock.svg');
 			if (who === 'computerChoice'){
+				updatePicks(document.getElementById('spockButton').id, who);
 				return document.getElementById('spockButton').id;
 			}
+			updatePicks(update, who);
 			break;
 		default:
 			alert(`Unknown choice: ${update}`);
@@ -339,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	let bestOfButtons = document.getElementsByClassName('bestOfButtons');
 	for (let button of bestOfButtons) {
 		button.addEventListener('click', function(){
-			game.rounds = this.id;
+			game.rounds = parseInt(this.id);
 			document.getElementById('selectedBestOf').textContent = this.id;
 		});
 	}

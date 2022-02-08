@@ -43,19 +43,25 @@ h3 {
 	visibility: visible;
 }
 
-#messageArea {
-	width: 100%;
-	font-size: 0.9rem;
+#messageArea, #userPick, #computerPick {
+	font-size: 1.1rem;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	background-color: lightgray;
-	border-radius: 50%;
-	overflow: hidden;
-	width: 85%;
-	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
 }
 
-.game .scoreArea {
+#userPick, #computerPick {
+	font-weight: bold;
+}
+
+#userPick {
+	padding-left: 10%;
+}
+
+#computerPick{
+	padding-right: 10%;
+}
+
+.game .scoreArea, .picks {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -193,6 +199,18 @@ ul h4 {
 	margin: 0;
 	padding: 0;
 	font-size: 1rem;
+}
+
+.picksArea{
+	text-align: center;
+}
+
+.picksArea:nth-child(1), .picksArea:nth-child(3){
+	width: 38%;
+} 
+
+.picksArea:nth-child(2){
+	width: 20%;
 }
 
 /*User-friendly area containing all interactions*/
@@ -451,6 +469,10 @@ button:disabled {
 		padding-bottom: 1.3rem;
 		width: 100%;
 	}
+
+	.picks{
+		align-items: flex-start;
+	}
 }
 
 @media (max-width: 630px) {
@@ -461,12 +483,5 @@ button:disabled {
 
 	.difficulty {
 		width: 70%;
-	}
-
-	#messageArea {
-		height: 10vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 }
