@@ -2,29 +2,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Roboto:wght@300&display=swap');
 
 body {
-	font-family: 'Roboto', sans-serif;
 	margin: 0;
 }
 
-/* Setting this class to all sections as default, showing its content vertically */
-.flexContainer {
+/* Collecting all selectors sharing common features as follows */
+
+/* All flexboxes */
+.flexContainer, 
+.game .scoreArea, 
+.picks, 
+.game, 
+.gameArea, 
+.area, 
+.commands, 
+.instructions, 
+.instructionsArea, 
+.difficulty, 
+.difficultyArea, 
+.easyMediumHard, 
+.bestOf, 
+.newGame {
 	display: flex;
+}
+
+/* Responsive width */
+.game .scoreArea, 
+.picks,
+.gameArea,
+.commands {
+	width: 100%;
+}
+
+/* Flexbox: alignment */
+.flexContainer,
+.game,
+.difficultyArea:nth-child(2) {
+	flex-direction: column;
+}
+
+.flexContainer,
+.game,
+.area,
+.instructions,
+.instructionsArea {
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
+}
+
+.scoreArea, 
+.picks,
+.gameArea,
+.commands,
+.difficulty,
+.difficultyArea,
+.easyMediumHard, 
+.bestOf, 
+.newGame {
+	justify-content: space-around;
+	align-items: center;
+}
+
+/* font */
+h1, 
+h2,
+.commandButton,
+.difficultyButtons,
+.bestOfButtons,
+.newGameButton,
+button:disabled,
+.commands button:disabled {
+	font-family: 'Nunito', sans-serif;
+}
+
+body,
+.flexContainer > h2,
+#messageArea, 
+#userPick, 
+#computerPick {
+	font-family: 'Roboto', sans-serif;
+}
+
+.flexContainer > h2,
+#messageArea, 
+#userPick, 
+#computerPick {
+	font-weight: 300; 
+}
+
+/* Buttons */
+.commandButton,
+.commands button:disabled {
+	font-size: 1rem;
+}
+
+.commandButton,
+.commands button:disabled,
+.difficultyButtons,
+.bestOfButtons,
+.newGameButton,
+button:disabled {
+	border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+	cursor: pointer;
+  text-rendering: geometricprecision;
+  touch-action: manipulation;
+}
+
+/* centered text */
+h1, 
+h2,
+button:disabled,
+.commandButton,
+.commands button:disabled,
+.difficultyButtons,
+.bestOfButtons,
+.newGameButton,
+.picksArea,
+#notes
+{
+	text-align: center;
+}
+
+/* font-size */
+.difficultyButtons,
+.bestOfButtons,
+.newGameButton,
+button:disabled {
+	font-size: 0.8rem;
+}
+
+.flexContainer > h2,
+#notes {
+	font-size: 0.9rem;
+}
+
+/* Setting this class to all sections as default */
+.flexContainer {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 
-header h1, h2, h3 {
-	font-family: 'Nunito', sans-serif;
+h1, h2 {
 	margin: 0;
-	text-align: center;
-}
-.flexContainer > h2 {
-	font-size: 0.9rem;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
 }
 
 h3 {
@@ -45,8 +165,6 @@ h3 {
 
 #messageArea, #userPick, #computerPick {
 	font-size: 1.1rem;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
 }
 
 #userPick, #computerPick {
@@ -62,12 +180,7 @@ h3 {
 }
 
 .game .scoreArea, .picks {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
 	margin-top: 1.0rem;
-	width: 100%;
 }
 #yourCount {
 	color: green;
@@ -88,10 +201,6 @@ ul h4 {
 
 /* Showing children of the game container vertically */
 .flexContainer .game {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 	margin-top: 0.7rem;
 	margin-bottom: 0.7rem;
 }
@@ -99,10 +208,6 @@ ul h4 {
 /* Setting equal speace between children of the gameArea container */
 .flexContainer .gameArea {
 	height: 90%;
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
 	margin-top: 0.7rem;
 }
 
@@ -113,16 +218,17 @@ ul h4 {
 
 /* Players' areas - the style declared here and related breakpoints affect images positioning*/
 .flexContainer .area {
-	display: flex;
 	height: 90%;
 	width: auto;
-	justify-content: center;
-	align-items: center;
 }
 
 /* Setting Responsivness of images */
 .area img {
 	height: 80%;
+}
+
+.instructionsArea img,
+.area img {
 	width: 80%;
 }
 
@@ -130,11 +236,6 @@ ul h4 {
 /* Distancing them equally */
 .flexContainer .commands {
 	height: 10%;
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	flex-direction: row;
 	margin-top: 15px;
 	margin-bottom: 5px;
 }
@@ -144,16 +245,7 @@ ul h4 {
 	width: 12%;
   background: #AD0600;
   border: 1px solid #AD0600;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
   color: #FFFFFF;
-  cursor: pointer;
-  font-family: nunito,roboto,sans-serif;
-  font-size: 1rem;
-  text-align: center;
-  text-rendering: geometricprecision;
-  touch-action: manipulation;
 }
 
 /* lvha effects on buttons */
@@ -175,23 +267,12 @@ ul h4 {
 }
 
 .flexContainer .instructions {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 	padding-bottom: 1.3rem;
 	margin-top: 1.1rem;
 }
 
 .instructionsArea {
 	width: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.instructionsArea img {
-	width: 80%;
 }
 
 .instructionsArea ul {
@@ -199,10 +280,6 @@ ul h4 {
 	margin: 0;
 	padding: 0;
 	font-size: 1rem;
-}
-
-.picksArea{
-	text-align: center;
 }
 
 .picksArea:nth-child(1), .picksArea:nth-child(3){
@@ -215,28 +292,11 @@ ul h4 {
 
 /*User-friendly area containing all interactions*/
 .difficulty {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around;
 	width: 85%;
 }
 
 .difficultyArea {
-	display: flex;
 	width: 40%;
-	align-items: center;
-	justify-content: space-around;
-}
-
-.difficulty .difficultyArea:nth-child(2) {
-	flex-direction: column;
-	
-}
-
-.difficultyArea #notes {
-	text-align: center;
-	font-size: 0.8rem;
 }
 
 .difficultyArea > div {
@@ -244,25 +304,13 @@ ul h4 {
 }
 
 .easyMediumHard, .bestOf, .newGame {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around;
 	margin: 4px auto;
 }
 
 .difficultyButtons {
 	background: #FAEEE7;
   border: 1px solid #FAEEE7;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
   color: #325288;
-  cursor: pointer;
-  font-family: nunito,roboto,sans-serif;
-  text-align: center;
-  text-rendering: geometricprecision;
-  touch-action: manipulation;
 }
 
 #easy, #medium, #hard {
@@ -280,15 +328,7 @@ ul h4 {
 .bestOfButtons {
 	background: #325288;
   border: 1px solid #325288;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
   color: #FAEEE7;
-  cursor: pointer;
-  font-family: nunito,roboto,sans-serif;
-  text-align: center;
-  text-rendering: geometricprecision;
-  touch-action: manipulation;
 }
 
 [id='3'], [id='5'] {
@@ -306,15 +346,7 @@ ul h4 {
 .newGameButton {
 	background: #FAEEE7;
   border: 1px solid #FAEEE7;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
   color: #325288;
-  cursor: pointer;
-  font-family: nunito,roboto,sans-serif;
-  text-align: center;
-  text-rendering: geometricprecision;
-  touch-action: manipulation;
 }
 
 #newGameButton {
@@ -343,31 +375,12 @@ button:disabled {
 	border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
-	border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-	cursor: pointer;
-  font-family: nunito,roboto,sans-serif;
-  text-align: center;
-  text-rendering: geometricprecision;
-  touch-action: manipulation;
 }
 
 /* overriding the disabled style just for command buttons */
 
 .commands button:disabled {
 	width: 12%;
-	border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-	border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-	cursor: pointer;
-  font-family: nunito,roboto,sans-serif;
-  text-align: center;
-  text-rendering: geometricprecision;
-  touch-action: manipulation;
 }
 
 /* Bullet points for the lists/instructions */
