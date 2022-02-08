@@ -28,7 +28,7 @@ function disableButtons(){
 		button.disabled = true;
 		if(button.className === 'difficultyButtons'){
 			button.classList.toggle('difficultyButtons');
-		} else {
+		} else if(button.className === 'bestOfButtons'){
 			button.classList.toggle('bestOfButtons');
 		}
 	}
@@ -40,23 +40,48 @@ function disableButtons(){
 */
 function preReset (user, computer){
 	let allDifficultyButtons = document.querySelectorAll('.difficulty button');
+	let newGameButton = document.getElementById('newGameButton');
 
 	for(let button of allDifficultyButtons){
 		button.disabled = false;
 		if(button.id === 'easy' || button.id === 'medium' || button.id === 'hard'){
 			button.classList.add('difficultyButtons');
-		} else {
+		} else if(button.id === '3' || button.id === '5'){
 			button.classList.add('bestOfButtons');
 		}
 	}
 
+	// Communicating the winner
 	if(user > computer){
 		document.getElementById('messageArea').textContent = `You have won`;
 	} else{
 		document.getElementById('messageArea').textContent = 'The computer has won';
 	}
 
+	// Disabling command buttons once the game is over. The user has to hit "New Game" to start playing again 
+	let commandButtons = document.querySelectorAll('.commands button');
+	for (let commandButton of commandButtons){
+		commandButton.disabled = true;
+		commandButton.classList.toggle('commandButton');
+		// Making sure that command buttons are all the same style, by setting the stroke attribute to the disabled style
+		commandButton.childNodes[1].childNodes[1].setAttribute('stroke', '#666');
+	}
+	
 	document.getElementsByTagName('h2')[0].classList.remove('not-visible');
+	//Ci vuole un controllo per capire se il gioco fosse già iniziato
+	if(newGameButton.classList[0] === 'not-visible'){
+		newGameButton.classList.remove('not-visible');
+	}
+	console.log(newGameButton.classList);
+	if(newGameButton.classList[0] !== 'newGameButton' && newGameButton.classList[1] !== 'newGameButton'){
+		newGameButton.classList.add('newGameButton');
+	}
+	// Event listener associato solo una volta: manca un controllo che eviti di associarlo ogni volta
+	newGameButton.addEventListener('click', function (){
+		resetGame();
+		this.disabled = true;
+		this.classList.remove('newGameButton');
+	});
 }
 
 /**
@@ -65,6 +90,14 @@ function preReset (user, computer){
 function resetGame(){
 	document.getElementById('yourCount').textContent = '0';
 	document.getElementById('computerCount').textContent = '0';
+
+	let commandButtons = document.querySelectorAll('.commands button');
+	for (let commandButton of commandButtons){
+		commandButton.classList.add('commandButton');
+		commandButton.disabled = false;
+		// Making sure that command buttons are all the same style, by setting the stroke attribute to its original style
+		commandButton.childNodes[1].childNodes[1].setAttribute('stroke', '#fff');
+	}
 }
 
 /**
@@ -225,11 +258,10 @@ function runGame(choice, difficulty, nRounds){
 	let endOfGame = whoWins(choice, computerChoice);
 
 	// The following check determines how many chances the user is given, according to the level of difficulty selected
-	// For example, Easy = if the computer wins, the random pick hits again (50% more of chances to win); Medium = equal chances both for the user 
-	// and the computer; Hard = if the user wins, the random pick hits again (50% less of chances to lose).
+	// For example, Easy = if the computer wins, the random pick hits again (+50% of chances to win); Medium = equal chances both for the user 
+	// and the computer; Hard = if the user wins, the random pick hits again (-50% of chances to lose).
 	// 
 	let tempOutcome = document.getElementById('messageArea').textContent;
-	console.log(difficulty + ' ' + tempOutcome);
 	if (difficulty === 'easy' && tempOutcome === 'Computer wins!'){
 		document.getElementById('computerCount').textContent = --endOfGame[1];
 		randomChoice = Math.floor(Math.random() * 5);
@@ -318,7 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		button.addEventListener('click', function(){
 			let hasStartedAlready = document.getElementById('messageArea');
 			if(hasStartedAlready.textContent === 'You have won' || hasStartedAlready.textContent === 'The computer has won'){
-				resetGame();
 				let diff = document.getElementById('selectedDifficulty');
 				diff.style.textTransform = 'lowercase';
 				game.difficulty = diff.textContent;

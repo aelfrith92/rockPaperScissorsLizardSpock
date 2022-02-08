@@ -225,7 +225,7 @@ ul h4 {
 	width: 95%;
 }
 
-.easyMediumHard, .bestOf {
+.easyMediumHard, .bestOf, .newGame {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -245,6 +245,10 @@ ul h4 {
   text-align: center;
   text-rendering: geometricprecision;
   touch-action: manipulation;
+}
+
+#easy, #medium, #hard {
+	width: 30%;
 }
 
 /* lvha effects on buttons */
@@ -269,10 +273,38 @@ ul h4 {
   touch-action: manipulation;
 }
 
+[id='3'], [id='5'] {
+	width: 47%;
+}
+
 /* lvha effects on buttons */
 .bestOfButtons:hover,
 .bestOfButtons:active {
   background-color: initial;
+  background-position: 0 0;
+  color: #325288;
+}
+
+.newGameButton {
+	background: #FAEEE7;
+  border: 1px solid #FAEEE7;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #325288;
+  cursor: pointer;
+  font-family: nunito,roboto,sans-serif;
+  text-align: center;
+  text-rendering: geometricprecision;
+  touch-action: manipulation;
+}
+
+#newGameButton {
+	width: 97%;
+}
+
+.newGameButton:hover,.newGameButton:active {
+	background-color: #fff;
   background-position: 0 0;
   color: #325288;
 }
@@ -290,6 +322,23 @@ ul h4 {
 }
 
 button:disabled {
+	border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+	border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+	cursor: pointer;
+  font-family: nunito,roboto,sans-serif;
+  text-align: center;
+  text-rendering: geometricprecision;
+  touch-action: manipulation;
+}
+
+/* overriding the disabled style just for command buttons */
+
+.commands button:disabled {
+	width: 12%;
 	border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
