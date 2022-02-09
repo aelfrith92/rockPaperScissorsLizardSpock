@@ -14,7 +14,8 @@ function hoverButtons (){
 	}
 }
 hoverButtons();
-// The Game algorythm starts here
+
+// The game algorithm starts here
 
 /**
 * This function sets buttons at the bottom of the page to a disabled status
@@ -35,15 +36,33 @@ function disableButtons(){
 }
 
 /**
-* This function ends the game and re-enable buttons for user preferences
-* It also shows the final score announcing the winnner
+* This function resets the game: scores set to 0 (zero), it re-assigns original classes to command buttons
+*/
+function resetGame(){
+	document.getElementById('yourCount').textContent = '0';
+	document.getElementById('computerCount').textContent = '0';
+
+	let commandButtons = document.querySelectorAll('.commands button');
+	for (let commandButton of commandButtons){
+		commandButton.classList.add('commandButton');
+		commandButton.disabled = false;
+		// Making sure that command buttons are all the same style, by setting the stroke attribute to its original style
+		commandButton.childNodes[1].childNodes[1].setAttribute('stroke', '#fff');
+	}
+}
+
+/**
+* This function ends the game and re-enable buttons for user preferences.
+* It also shows the final score announcing the winnner.
 */
 function preReset (user, computer){
 	let allDifficultyButtons = document.querySelectorAll('.difficulty button');
 	let newGameButton = document.getElementById('newGameButton');
 
+	// Re-enabling preferences for the next game, by assigning them their original classes
 	for(let button of allDifficultyButtons){
 		button.disabled = false;
+		// Using IDs instead of classes, as they have been removed at this stage
 		if(button.id === 'easy' || button.id === 'medium' || button.id === 'hard'){
 			button.classList.add('difficultyButtons');
 		} else if(button.id === '3' || button.id === '5'){
@@ -66,16 +85,18 @@ function preReset (user, computer){
 		// Making sure that command buttons are all the same style, by setting the stroke attribute to the disabled style
 		commandButton.childNodes[1].childNodes[1].setAttribute('stroke', '#666');
 	}
-	
+
+	// The message at the top shows up again
 	document.getElementsByTagName('h2')[0].classList.remove('not-visible');
-	//Ci vuole un controllo per capire se il gioco fosse già iniziato
+	// Making sure that the new game button comes back fully functioning
 	if(newGameButton.classList[0] === 'not-visible'){
 		newGameButton.classList.remove('not-visible');
 	}
 	if(newGameButton.classList[0] !== 'newGameButton' && newGameButton.classList[1] !== 'newGameButton'){
 		newGameButton.classList.add('newGameButton');
 	}
-	// Event listener associato solo una volta: manca un controllo che eviti di associarlo ogni volta
+
+	// Adding a listener to the 'new game' button and disabling it once the user clicks on it
 	newGameButton.addEventListener('click', function (){
 		resetGame();
 		this.disabled = true;
@@ -83,91 +104,33 @@ function preReset (user, computer){
 	});
 }
 
-/**
-* This function is supposed to reset the game
-*/
-function resetGame(){
-	document.getElementById('yourCount').textContent = '0';
-	document.getElementById('computerCount').textContent = '0';
-
-	let commandButtons = document.querySelectorAll('.commands button');
-	for (let commandButton of commandButtons){
-		commandButton.classList.add('commandButton');
-		commandButton.disabled = false;
-		// Making sure that command buttons are all the same style, by setting the stroke attribute to its original style
-		commandButton.childNodes[1].childNodes[1].setAttribute('stroke', '#fff');
-	}
-}
-
+// This function updates the 'pick messages' to let the user what they have just picked - for their convenience
 function updatePicks(what, who){
 	who = who.split('C');
 	what = what.split('B');
-	
+
+	/* Using the template literal spared some lines of code, by avoiding an unnecessary control*/
 	who = document.getElementById(`${who[0]}Pick`);
-	if(who.id === 'userPick'){
-		who.textContent = what[0];
-	} else {
-		who.textContent = what[0];
-	}
+	who.textContent = what[0];
 	who.style.textTransform = "capitalize";
 }
 
 /**
-* The following function updates the images inside the DOM, according to user's choice, as well as computer random pick
+* The following function updates the images inside the DOM, according to user's choice, as well as the computer random pick
 * Compared to a previous version, it spares some lines of code, repeated in the calling function for both the user and the computer
 */
 function updateSVG (update, who){
-	
-	switch(update){
-		case 'rockButton':
-		case 0:
-			document.getElementById(who).setAttribute('src', 'assets/images/choices/Rock.svg');
-			if (who === 'computerChoice'){
-				updatePicks(document.getElementById('rockButton').id, who);
-				return document.getElementById('rockButton').id;
-			}
-			updatePicks(update, who);
-			break;
-		case 'paperButton':
-		case 1:
-			document.getElementById(who).setAttribute('src', 'assets/images/choices/Paper.svg');
-			if (who === 'computerChoice'){
-				updatePicks(document.getElementById('paperButton').id, who);
-				return document.getElementById('paperButton').id;
-			}
-			updatePicks(update, who);
-			break;
-		case 'scissorsButton':
-		case 2:
-			document.getElementById(who).setAttribute('src', 'assets/images/choices/Scissors.svg');
-			if (who === 'computerChoice'){
-				updatePicks(document.getElementById('scissorsButton').id, who);
-				return document.getElementById('scissorsButton').id;
-			}
-			updatePicks(update, who);
-			break;
-		case 'lizardButton':
-		case 3:
-			document.getElementById(who).setAttribute('src', 'assets/images/choices/Lizard.svg');
-			if (who === 'computerChoice'){
-				updatePicks(document.getElementById('lizardButton').id, who);
-				return document.getElementById('lizardButton').id;
-			}
-			updatePicks(update, who);
-			break;
-		case 'spockButton':
-		case 4:
-			document.getElementById(who).setAttribute('src', 'assets/images/choices/Spock.svg');
-			if (who === 'computerChoice'){
-				updatePicks(document.getElementById('spockButton').id, who);
-				return document.getElementById('spockButton').id;
-			}
-			updatePicks(update, who);
-			break;
-		default:
-			alert(`Unknown choice: ${update}`);
-      throw `Unknown choice triggered: ${update}. Aborting!`;
+
+	/* Sparing some lines of code with template literals*/
+	let what = update.toString().split('B');	
+
+	document.getElementById(who).setAttribute('src', `assets/images/choices/${what[0]}.svg`);
+	if (who === 'computerChoice'){
+		updatePicks(document.getElementById(`${what[0]}Button`).id, who);
+		return document.getElementById(`${what[0]}Button`).id;
 	}
+	updatePicks(update, who);
+	
 }
 
 /**
@@ -272,9 +235,12 @@ function score(result){
 * - updates the message area
 */
 function runGame(choice, difficulty, nRounds){
+
+	let computerPicks = ['rockButton','paperButton', 'scissorsButton', 'lizardButton', 'spockButton'];
+	
 	updateSVG(choice, 'userChoice');
 	
-	let randomChoice = Math.floor(Math.random() * 5);
+	let randomChoice = computerPicks[Math.floor(Math.random() * 5)];
 	let computerChoice = updateSVG(randomChoice, 'computerChoice');
 	// The following variable is an array that contains the scores.
 	// It determines the end of the game.
@@ -287,12 +253,12 @@ function runGame(choice, difficulty, nRounds){
 	let tempOutcome = document.getElementById('messageArea').textContent;
 	if (difficulty === 'easy' && tempOutcome === 'Computer wins!'){
 		document.getElementById('computerCount').textContent = --endOfGame[1];
-		randomChoice = Math.floor(Math.random() * 5);
+		randomChoice = computerPicks[Math.floor(Math.random() * 5)];
 		computerChoice = updateSVG(randomChoice, 'computerChoice');
 		endOfGame = whoWins(choice, computerChoice);
 	} else if (difficulty === 'hard' && tempOutcome === 'You win!'){
 		document.getElementById('yourCount').textContent = --endOfGame[0];
-		randomChoice = Math.floor(Math.random() * 5);
+		randomChoice = computerPicks[Math.floor(Math.random() * 5)];
 		computerChoice = updateSVG(randomChoice, 'computerChoice');
 		endOfGame = whoWins(choice, computerChoice);
 	}

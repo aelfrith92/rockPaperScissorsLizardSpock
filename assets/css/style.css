@@ -390,23 +390,23 @@ button:disabled {
 }
 
 #scissors li::before {
-	background: url('../images/choices/Scissors.svg') no-repeat bottom center;
+	background: url('../images/choices/scissors.svg') no-repeat bottom center;
 }
 
 #paper li::before {
-	background: url('../images/choices/Paper.svg') no-repeat bottom center;
+	background: url('../images/choices/paper.svg') no-repeat bottom center;
 }
 
 #rock li::before {
-	background: url('../images/choices/Rock.svg') no-repeat bottom center;
+	background: url('../images/choices/rock.svg') no-repeat bottom center;
 }
 
 #spock li::before {
-	background: url('../images/choices/Spock.svg') no-repeat bottom center;
+	background: url('../images/choices/spock.svg') no-repeat bottom center;
 }
 
 #lizard li::before {
-	background: url('../images/choices/Lizard.svg') no-repeat bottom center;
+	background: url('../images/choices/lizard.svg') no-repeat bottom center;
 }
 
 /* Breakpoints */
