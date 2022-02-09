@@ -1,7 +1,9 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Roboto:wght@300&display=swap');
 
-body {
+body,
+h1, 
+h2 {
 	margin: 0;
 }
 
@@ -29,8 +31,14 @@ body {
 .game .scoreArea, 
 .picks,
 .gameArea,
-.commands {
+.commands,
+.difficulty {
 	width: 100%;
+}
+
+.commandButton,
+.commands button:disabled {
+	width: 12%;
 }
 
 /* Flexbox: alignment */
@@ -109,6 +117,43 @@ button:disabled {
   touch-action: manipulation;
 }
 
+.difficultyButtons,
+.newGameButton {
+	background: #FAEEE7;
+}
+
+.difficultyButtons,
+.newGameButton {
+	border: 1px solid #FAEEE7;
+}
+
+.difficultyButtons,
+.difficultyButtons:hover,
+.difficultyButtons:active,
+.bestOfButtons:hover,
+.bestOfButtons:active,
+.newGameButton,
+.newGameButton:hover,
+.newGameButton:active,
+#selectedBestOf, 
+#selectedDifficulty {
+	color: #325288;
+}
+
+.difficultyButtons:hover,
+.difficultyButtons:active,
+.newGameButton:hover,
+.newGameButton:active {
+  background-color: #fff;
+}
+
+.bestOfButtons:hover,
+.bestOfButtons:active,
+.commandButton:hover,
+.commandButton:active {
+  background-color: initial;
+}
+
 /* centered text */
 h1, 
 h2,
@@ -132,19 +177,20 @@ button:disabled {
 	font-size: 0.8rem;
 }
 
+/* margins */
+.game > div {
+	margin: 0.9rem auto;
+}
+
 .flexContainer > h2,
 #notes {
-	font-size: 0.9rem;
+	font-size: 1rem;
 }
 
 /* Setting this class to all sections as default */
 .flexContainer {
 	margin-top: 5px;
 	margin-bottom: 5px;
-}
-
-h1, h2 {
-	margin: 0;
 }
 
 h3 {
@@ -167,7 +213,9 @@ h3 {
 	font-size: 1.1rem;
 }
 
-#userPick, #computerPick {
+#userPick, 
+#computerPick,
+#notes span {
 	font-weight: bold;
 }
 
@@ -179,9 +227,6 @@ h3 {
 	padding-right: 10%;
 }
 
-.game .scoreArea, .picks {
-	margin-top: 1.0rem;
-}
 #yourCount {
 	color: green;
 }
@@ -200,24 +245,23 @@ ul h4 {
 }
 
 /* Showing children of the game container vertically */
-.flexContainer .game {
+.game {
 	margin-top: 0.7rem;
 	margin-bottom: 0.7rem;
 }
 
 /* Setting equal speace between children of the gameArea container */
-.flexContainer .gameArea {
+.gameArea {
 	height: 90%;
-	margin-top: 0.7rem;
 }
 
 /* The 'VS' middle content */
-.gameArea .area:nth-child(2){
+.area:nth-child(2){
 	font-size: 1.8rem;
 }
 
 /* Players' areas - the style declared here and related breakpoints affect images positioning*/
-.flexContainer .area {
+.area {
 	height: 90%;
 	width: auto;
 }
@@ -234,15 +278,12 @@ ul h4 {
 
 /* Setting the layout for the commands area, namely, the one containing buttons; */
 /* Distancing them equally */
-.flexContainer .commands {
+.commands {
 	height: 10%;
-	margin-top: 15px;
-	margin-bottom: 5px;
 }
 
 /* Default style of game buttons */
 .commandButton {
-	width: 12%;
   background: #AD0600;
   border: 1px solid #AD0600;
   color: #FFFFFF;
@@ -251,9 +292,7 @@ ul h4 {
 /* lvha effects on buttons */
 .commandButton:hover,
 .commandButton:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #AD0600;
+	color: #AD0600;
 }
 
 /* lvha effects on buttons */
@@ -290,11 +329,6 @@ ul h4 {
 	width: 20%;
 }
 
-/*User-friendly area containing all interactions*/
-.difficulty {
-	width: 85%;
-}
-
 .difficultyArea {
 	width: 40%;
 }
@@ -303,26 +337,16 @@ ul h4 {
 	width: 95%;
 }
 
-.easyMediumHard, .bestOf, .newGame {
+.easyMediumHard, 
+.bestOf, 
+.newGame {
 	margin: 4px auto;
 }
 
-.difficultyButtons {
-	background: #FAEEE7;
-  border: 1px solid #FAEEE7;
-  color: #325288;
-}
-
-#easy, #medium, #hard {
+#easy,
+#medium, 
+#hard {
 	width: 30%;
-}
-
-/* lvha effects on buttons */
-.difficultyButtons:hover,
-.difficultyButtons:active {
-  background-color: #fff;
-  background-position: 0 0;
-  color: #325288;
 }
 
 .bestOfButtons {
@@ -331,44 +355,17 @@ ul h4 {
   color: #FAEEE7;
 }
 
-[id='3'], [id='5'] {
+[id='3'], 
+[id='5'] {
 	width: 47%;
-}
-
-/* lvha effects on buttons */
-.bestOfButtons:hover,
-.bestOfButtons:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #325288;
-}
-
-.newGameButton {
-	background: #FAEEE7;
-  border: 1px solid #FAEEE7;
-  color: #325288;
 }
 
 #newGameButton {
 	width: 97%;
 }
 
-.newGameButton:hover,.newGameButton:active {
-	background-color: #fff;
-  background-position: 0 0;
-  color: #325288;
-}
-
-#notes span {
-	font-weight: bold;
-}
-
 #selectedDifficulty {
 	text-transform: capitalize;
-}
-
-#selectedBestOf, #selectedDifficulty {
-	color: #325288;
 }
 
 button:disabled {
@@ -377,57 +374,39 @@ button:disabled {
   color: #666666;
 }
 
-/* overriding the disabled style just for command buttons */
-
-.commands button:disabled {
-	width: 12%;
-}
-
 /* Bullet points for the lists/instructions */
-#scissors li::before {
-	content: '';
-	width: 1rem;
-	height: 1rem;
-	display: inline-block;
-	background: url('../images/choices/Scissors.svg') no-repeat bottom center;
-	margin-bottom: -2px;
-	margin-right: 4px;
-}
-#paper li::before {
-	content: '';
-	width: 1rem;
-	height: 1rem;
-	display: inline-block;
-	background: url('../images/choices/Paper.svg') no-repeat bottom center;
-	margin-bottom: -2px;
-	margin-right: 4px;
-}
-#rock li::before {
-	content: '';
-	width: 1rem;
-	height: 1rem;
-	display: inline-block;
-	background: url('../images/choices/Rock.svg') no-repeat bottom center;
-	margin-bottom: -2px;
-	margin-right: 4px;
-}
-#spock li::before {
-	content: '';
-	width: 1rem;
-	height: 1rem;
-	display: inline-block;
-	background: url('../images/choices/Spock.svg') no-repeat bottom center;
-	margin-bottom: -2px;
-	margin-right: 4px;
-}
+
+#scissors li::before,
+#paper li::before,
+#rock li::before,
+#spock li::before,
 #lizard li::before {
 	content: '';
 	width: 1rem;
 	height: 1rem;
 	display: inline-block;
-	background: url('../images/choices/Lizard.svg') no-repeat bottom center;
 	margin-bottom: -2px;
 	margin-right: 4px;
+}
+
+#scissors li::before {
+	background: url('../images/choices/Scissors.svg') no-repeat bottom center;
+}
+
+#paper li::before {
+	background: url('../images/choices/Paper.svg') no-repeat bottom center;
+}
+
+#rock li::before {
+	background: url('../images/choices/Rock.svg') no-repeat bottom center;
+}
+
+#spock li::before {
+	background: url('../images/choices/Spock.svg') no-repeat bottom center;
+}
+
+#lizard li::before {
+	background: url('../images/choices/Lizard.svg') no-repeat bottom center;
 }
 
 /* Breakpoints */
@@ -443,7 +422,13 @@ button:disabled {
 
 @media (max-width: 768px) {
 
-	.flexContainer > div, .instructionsArea, .difficultyArea, .instructionsArea > ul {
+	.flexContainer > div, 
+	.instructionsArea, 
+	.difficultyArea, 
+	.instructionsArea > ul,
+	.scoreArea,
+	.scoreArea h2,
+	.instructions {
 		width: 100%;
 	}
 	
@@ -455,13 +440,13 @@ button:disabled {
 		font-size: 0.6rem;
 	}
 
-	.game .scoreArea {
+	.scoreArea,
+	.difficulty,
+	.instructions {
 		flex-direction: column;
-		width: 100%;
 	}
 
 	.difficulty {
-		flex-direction: column;
 		width: 50%;
 	}
 
@@ -471,16 +456,9 @@ button:disabled {
 		padding-top: 0.3rem;
 		padding-bottom: 0.3rem;
 	}
-
-	.scoreArea h2{
-		width: 100%
-	}
 	
-	.flexContainer .instructions {
-		display: flex;
-		flex-direction: column;
+	.instructions {
 		padding-bottom: 1.3rem;
-		width: 100%;
 	}
 
 	.picks{
@@ -490,8 +468,10 @@ button:disabled {
 
 @media (max-width: 630px) {
 	
-	.commandButton {
+	.commandButton,
+	.commands button:disabled {
 		min-width: 2.0rem;
+		width: 19%;
 	}
 
 	.difficulty {
