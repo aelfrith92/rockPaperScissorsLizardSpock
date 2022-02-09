@@ -409,6 +409,22 @@ button:disabled {
 	background: url('../images/choices/lizard.svg') no-repeat bottom center;
 }
 
+/* Footer section starts here */
+
+footer {
+	text-align: center;
+}
+
+.social-networks li {
+	display: inline;
+	list-style-type: none;
+	margin: 0 15px;
+}
+
+footer p {
+	font-size: 0.5rem;
+}
+
 /* Breakpoints */
 @media (max-width: 992px) {
 	.commandButton {

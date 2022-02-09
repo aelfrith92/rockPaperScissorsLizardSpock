@@ -95,13 +95,6 @@ function preReset (user, computer){
 	if(newGameButton.classList[0] !== 'newGameButton' && newGameButton.classList[1] !== 'newGameButton'){
 		newGameButton.classList.add('newGameButton');
 	}
-
-	// Adding a listener to the 'new game' button and disabling it once the user clicks on it
-	newGameButton.addEventListener('click', function (){
-		resetGame();
-		this.disabled = true;
-		this.classList.remove('newGameButton');
-	});
 }
 
 // This function updates the 'pick messages' to let the user what they have just picked - for their convenience
@@ -131,6 +124,24 @@ function updateSVG (update, who){
 	}
 	updatePicks(update, who);
 	
+}
+
+/**
+* This function retrieves the scores, updates them and passes 
+* them as an array to the calling function whoWins. The latter will in turn
+* pass such an array to the calling function runGame
+*/
+function score(result){
+	let userScoreSoFar = parseInt(document.getElementById('yourCount').textContent);
+	let computerScoreSoFar = parseInt(document.getElementById('computerCount').textContent);
+	
+	if (result === 'You win!'){
+		document.getElementById('yourCount').textContent = ++userScoreSoFar;
+	} else if (result === 'Computer wins!' || result !== 'Tie!'){
+		document.getElementById('computerCount').textContent = ++computerScoreSoFar;
+	}
+
+	return [userScoreSoFar, computerScoreSoFar];
 }
 
 /**
@@ -210,22 +221,6 @@ function whoWins(user, computer){
 	}
 	//The array of scores is then returned in the runGame function
 	return score(messageDOM.textContent);
-}
-
-/**
-* This function retrieves the scores, updates them and passes 
-* them as an array to the calling function above
-*/
-function score(result){
-	let userScoreSoFar = parseInt(document.getElementById('yourCount').textContent);
-	let computerScoreSoFar = parseInt(document.getElementById('computerCount').textContent);
-	if (result === 'You win!'){
-		document.getElementById('yourCount').textContent = ++userScoreSoFar;
-	} else if (result === 'Computer wins!' || result !== 'Tie!'){
-		document.getElementById('computerCount').textContent = ++computerScoreSoFar;
-	}
-
-	return [userScoreSoFar, computerScoreSoFar];
 }
 
 /**
@@ -332,12 +327,23 @@ document.addEventListener('DOMContentLoaded', function() {
 			document.getElementById('selectedBestOf').textContent = this.id;
 		});
 	}
+
+	// Adding the event listener to the New Game button. Putting it here should prevent that the button is being assigned 
+	// an event listener each time that the code runs, considering that the button status is also disabled at the beginning.
+	// The event listener was originally inside the preReset function as last task of it, but it kept being assigned the event 
+	// listener each time.
+	document.getElementById('newGameButton').addEventListener('click', function (){
+		resetGame();
+		this.disabled = true;
+		this.classList.remove('newGameButton');
+	});
 	
 	let buttons = document.getElementsByClassName('commandButton');
 	let userTriggeredChoice;
 	for (let button of buttons) {
 		button.addEventListener('click', function(){
 			let hasStartedAlready = document.getElementById('messageArea');
+			//Checking whether the game has already run once
 			if(hasStartedAlready.textContent === 'You have won' || hasStartedAlready.textContent === 'The computer has won'){
 				let diff = document.getElementById('selectedDifficulty');
 				diff.style.textTransform = 'lowercase';
