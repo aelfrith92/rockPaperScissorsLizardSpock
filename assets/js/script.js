@@ -1,8 +1,8 @@
 /**
 * It adds the hovering effect to the svg file, which cannot be styled via CSS
 */
-function hoverButtons (){
-	let buttons = document.getElementsByClassName('commandButton');
+function hoverButtons() {
+    let buttons = document.getElementsByClassName('commandButton');
 	for(let button of buttons){
 		// Select the path tag inside the svg tag to modify its attribute 'stroke'
 		button.addEventListener('mouseover', function(){
@@ -216,8 +216,8 @@ function whoWins(user, computer){
 			}
 			break;
 		default:
-			alert(`Unknown choice: ${choice}`);
-      throw `Unknown choice triggered: ${choice}. Aborting!`;
+			alert(`Unknown choice: ${user}`);
+      throw `Unknown choice triggered: ${user}. Aborting!`;
 	}
 	//The array of scores is then returned in the runGame function
 	return score(messageDOM.textContent);
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	let game = {
 		difficulty: 'easy',
 		rounds: 3
-	}
+	};
 
 	let allButtons = document.getElementsByTagName('button');
 	for (let button of allButtons) {
