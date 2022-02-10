@@ -136,6 +136,8 @@ Code optimization has returned excellent results in terms of deleted-lines-of-co
   * behaviour: any sign in the array wins over the sign next to the one picked OR the one +3 positions in the same array. If the position falls outside the array, the count just goes back to the initial index.
   * for example, following the hypothetical array['R','P','S','L','S'], the computerPick[y] is Spock, the userPick[x] is Paper, the user wins because y = x+3;
   * the challenge: I have tried to re-create this behaviour in a few attempts and for the time being the priority is the submission.
+ 
+Last but not least, event listeners regarding touching behaviours.
 
 ### Design
 #### Colour Palette
@@ -215,46 +217,29 @@ Testing is required on MilestoneProject-2
 - The live Project can be found [here](https://aelfrith92.github.io/rockPaperScissorsLizardSpock/).
 
 ### Test Results
-- The animation, links, images, custom layouts of containers behaved as expected on 3 different browsers.
+- The images, custom layouts, button behaviours, JS DOM manipulation behaved as expected on 3 different browsers.
 - No overlapping detected.
-- Nav links and external links behave as expected.
-- Form validation returns all variables correctly assigned to each HTML "name" attributes
-- Code validation returned no errors 
+- External links behave as expected.
+- DOM manipulation correctly works thanks to correct classes and IDs assigned to all elements
+- Code validation returned no errors, however, JS Hint returned 50+ warnings about JS ES6 and its compatibility with older browsers
 - Lighthouse returned the following outcome
-    ![lighthouse](docs/readmeImages/lighthouse.jpg)
+    ![lighthouse](docs/readmeImages/lighthouseRPSLS.jpg)
 - Wave returned the following outcome
   ![wave](docs/readmeImages/wave.jpg)
-  The only 2 alerts returned concerned the too-small texts at the bottom of the page, which I have not changed, as it is meant as secondary content for other targets, aware of such formalities.
-  
+  The only 2 alerts returned concerned the too-small texts at the bottom of the page, which I have not changed, as it is meant as secondary content for other targets, aware of such formalities
 
 ### Issues and Resolutions to issues found during testing
-* Indentation
-  - Even though aware of the indentation issues in the HTML and CSS files, each time that I have tried to push the correct versions, files on gitHub does not mirror the actual appearance on Replit. See a comparison as follows:
-  	![replit_indentation](docs/readmeImages/replit_indentation.jpg)<br>
-		VS<br>
-		![gitHub_indentation](docs/readmeImages/gitHub_indentation.jpg)
-
-* Radio inputs alignment in the contact form does not mirror expectations on Apple Safari, as they are aligned to the left, instead of center as on Chrome and Firefox. I have tried with compatible alternatives (-webkit-), but it did not work. Find a screenshot of the issue as follows:
- ![radio](docs/readmeImages/radio.jpg)
- 
-* The Toggler Button in the navigation menu came with a bug, only if the warning theme is selected. More specifically, the button is presented without the 3 parallel lines. To solve this issue, I have included an svg file which resembles the 3 lines. However, it still goes off the expected layout when the viewport is super narrow (in fact, the bug only shows up if you open the Chrome dev tools, otherwise the ordinary, minimum width does not reveal this issue). Find a comparison below:
-  - ordinary viewport:
-    ![ordinary](docs/readmeImages/ordinary.jpg)
-  - unexpected responsive behaviour:
-    ![narrow](docs/readmeImages/super_narrow.jpg)
-
-* Generally speaking, layout problems were the most frequent ones. I have overcome them by adopting an essential approach: creating containers without contents first, in order to test their behaviour. Adding content once containers behaved as expected.
-
-* Images size affected the performance of the page. Re-scaling and converting all of them to webp solved most of the issues.
-
-* The categories pictures were initially overlapped by other containers. I have solved this issue by editing their dimensions and by adding padding and margins to create a sort of frame sorrounding them, which does not catch the user's attention as it would have done with overlapped containers.
-
-* Centering in all containers has been troubleshot by using flexboxes, justify-content, align-itmes
+For this project involving JS, debugging the algorithm turned highly beneficial to my forma mentis. The most efficient way to get through all bugs consisted in inserting 'console.log' spies into each piece of code under investigation, to understand the variables course of action. Troubleshooting the code was a considerable part of this project. A few major bugs and related fixes regarded:
+  - forgetting to assign an index to variables that were actually arrays (like 'classList' or those returned by functions methods like .split());
+  - not considering data types when combining variables;
+  - syntax errors;
+  - logic-related mistakes;
+  - trying to manipulate 'undefined's. 
 ***
 ## Deployment
 
 ### Project Creation
-The project was started by navigating to the [template](https://github.com/Code-Institute-Org/gitpod-full-template) and clicking 'Use this template'. Under Repository name I input "cosmo-s-artworks" and checked the Include all branches checkbox. I then navigated to the new [repository](https://github.com/aelfrith92/cosmo-s-artworks). 
+The project was started by navigating to the [template](https://github.com/Code-Institute-Org/gitpod-full-template) and clicking 'Use this template'. Under Repository name I input "rockPaperScissorsLizardSpock" and checked the Include all branches checkbox. I then navigated to the new [repository](https://github.com/aelfrith92/rockPaperScissorsLizardSpock/). 
 
 Having Replit as main and only IDE, I went to my [Replit account](https://replit.com/@FredM2) and I have created a new Repl by pulling the repository from gitHub. 
 
@@ -270,7 +255,7 @@ The bash terminal within the Replit UI was already able to trigger commands like
 ** Moreover **, in order to deploy the content within the Replit environment each time, I have used the handy feature provided by Replit and concerning the **.replit file**. [By defining 2 lines of code in it](https://docs.replit.com/programming-ide/configuring-repl), namely the command to run and the language (that the command is written in), I was able to trigger "python3 -m http.server" in the replit shell by just hitting the **Run** button at the top. Find the full reference at https://docs.replit.com/programming-ide/configuring-repl
 
 ### Deploying the project with Github Pages
-1. Navigate to the GitHub [Repository](https://github.com/aelfrith92/cosmo-s-artworks)
+1. Navigate to the GitHub [Repository](https://github.com/aelfrith92/rockPaperScissorsLizardSpock/)
 1. Click the 'Settings' Tab.
 1. Scroll Down to the Git Hub Pages menu item on the left.
 1. Select 'Master Branch' as the source.
@@ -280,14 +265,10 @@ The bash terminal within the Replit UI was already able to trigger commands like
 ***
 ## Credits
 ### Code
-- Images respnsiveness https://www.w3schools.com/howto/howto_css_image_responsive.asp
 - W3schools has been the main source of knowledge
 - My mentor, Daisy McGirr, also suggested to pay attention to responsiveness, accessibility features, indentation, **commit signatures**.
 ### Content
-- Wood textures come from graphic resources available at https://www.wood-database.com/
-- Icons retrieved from both fontawesome and flaticon
-- General design ideas inspired by Angela Yu, founder of https://www.appbrewery.co/
-- Cosimino Morieri himself, as source of his own works and related photos
+All content was designed and created by me, the author of this project.
 
 ### Media
 All graphic materials are fully licensed or free-to-use.
@@ -295,6 +276,7 @@ All graphic materials are fully licensed or free-to-use.
 ### Acknowledgements
 
 I'd like to thank my mentor Daisy McGirr for his guidance throughout my project.<br>
+Needless to mention, I would like to also thank my partner Valentina for her constant support throughout this adventure.
 
 ## Comments
 ## **Git commits are showing up as two contributors, one as Alfredo Morieri (gitHub username: aelfrith92) and one verified as FredM2 (my replit username). This was caused by pushing without setting a signature for commits from replit. All commits were pushed by Alfredo Morieri.**

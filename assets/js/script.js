@@ -244,7 +244,6 @@ function runGame(choice, difficulty, nRounds){
 	// The following check determines how many chances the user is given, according to the level of difficulty selected
 	// For example, Easy = if the computer wins, the random pick hits again (+50% of chances to win); Medium = equal chances both for the user 
 	// and the computer; Hard = if the user wins, the random pick hits again (-50% of chances to lose).
-	// 
 	let tempOutcome = document.getElementById('messageArea').textContent;
 	if (difficulty === 'easy' && tempOutcome === 'Computer wins!'){
 		document.getElementById('computerCount').textContent = --endOfGame[1];
@@ -282,15 +281,11 @@ function runGame(choice, difficulty, nRounds){
 
 /*
 	The game starts when the user clicks or touches one of the buttons
-	For the time being, the game mode is set to 'best of 3'. Below are the steps
-	- The game starts together with an empty user's array of win VS lose OR a simple sum of WINs
+	The game mode is set to 'best of 3' - easy. Below are the steps
 	- The buttons all have event listeners which trigger the game and the consequent:
 		- random function for the computer choice
-		- update the choices in the DOM
-		- push of lose/win or count of WINs
-		- check on the number of rounds played (best of 3)
+		- check on the number of rounds played (best of 3-5)
 		- Score update and message update by updating the DOM
-		- user array reset to start over again
 */
 
 //Waiting for the DOM to finish loading before running the game
@@ -305,13 +300,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		rounds: 3
 	};
 
+	// All buttons will have this event listener attached - toggling the subtitle.
 	let allButtons = document.getElementsByTagName('button');
 	for (let button of allButtons) {
 		button.addEventListener('click', function(){
 			document.getElementsByTagName('h2')[0].classList.add('not-visible');
 		});
 	}
-	
+
+	// updating the user preferences in the DOM
 	let difficultyButtons = document.getElementsByClassName('difficultyButtons');
 	for (let button of difficultyButtons) {
 		button.addEventListener('click', function(){
@@ -320,6 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
+	// updating the user preferences in the DOM
 	let bestOfButtons = document.getElementsByClassName('bestOfButtons');
 	for (let button of bestOfButtons) {
 		button.addEventListener('click', function(){
@@ -337,7 +335,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		this.disabled = true;
 		this.classList.remove('newGameButton');
 	});
-	
+
+	// The following code is the most important one: it determines the runGame trigger, whenever a commandButton is clicked.
 	let buttons = document.getElementsByClassName('commandButton');
 	let userTriggeredChoice;
 	for (let button of buttons) {

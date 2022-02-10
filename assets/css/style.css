@@ -44,7 +44,8 @@ h2 {
 /* Flexbox: alignment */
 .flexContainer,
 .game,
-.difficultyArea:nth-child(2) {
+.difficultyArea:nth-child(2),
+.instructionsArea {
 	flex-direction: column;
 }
 
@@ -312,8 +313,6 @@ ul h4 {
 
 .instructionsArea {
 	width: 50%;
-	display: flex; 
-	flex-direction: column;
 }
 
 .instructionsArea ul {
